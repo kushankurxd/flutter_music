@@ -13,6 +13,10 @@ class PlaylistXD extends StatefulWidget {
 }
 
 class _PlaylistXDState extends State<PlaylistXD> {
+
+
+  double _value = 0.80;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -175,9 +179,13 @@ class _PlaylistXDState extends State<PlaylistXD> {
                                     padding: EdgeInsets.only(
                                         left: SizeConfig.widthMultiplier * 25),
                                     child: Slider(
-                                      value: 0.80,
+                                      value: _value,
                                       max: 3.02,
-                                      onChanged: (double value) {},
+                                      onChanged: (double value) {
+                                        setState(() {
+                                          _value = value;
+                                        });
+                                      },
                                     ),
                                   )
                                 ],

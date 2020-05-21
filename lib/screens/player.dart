@@ -13,6 +13,10 @@ class PlayerXD extends StatefulWidget {
 }
 
 class _PlayerXDState extends State<PlayerXD> {
+  double _value = 0.56;
+
+  bool _isPlaying = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,15 +84,25 @@ class _PlayerXDState extends State<PlayerXD> {
                                       Icons.skip_previous,
                                       color: textDark,
                                     ),
-                                    Container(
-                                        padding: EdgeInsets.all(
-                                            SizeConfig.widthMultiplier * 3),
-                                        decoration: BoxDecoration(
-                                            color: backgroundColor,
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                                color: textLight, width: 1.6)),
-                                        child: Icon(Icons.pause)),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _isPlaying = !_isPlaying;
+                                        });
+                                      },
+                                      child: Container(
+                                          padding: EdgeInsets.all(
+                                              SizeConfig.widthMultiplier * 3),
+                                          decoration: BoxDecoration(
+                                              color: backgroundColor,
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  color: textLight,
+                                                  width: 1.6)),
+                                          child: _isPlaying
+                                              ? Icon(Icons.pause)
+                                              : Icon(Icons.play_arrow)),
+                                    ),
                                     Icon(
                                       Icons.skip_next,
                                       color: textDark,
@@ -140,12 +154,13 @@ class _PlayerXDState extends State<PlayerXD> {
                           ],
                         ),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pop(context);
                           },
                           child: Container(
                               decoration: BoxDecoration(
-                                border: Border.all(color: textLight, width: 0.6),
+                                border:
+                                    Border.all(color: textLight, width: 0.6),
                                 shape: BoxShape.circle,
                               ),
                               padding: EdgeInsets.all(3),
@@ -253,9 +268,13 @@ class _PlayerXDState extends State<PlayerXD> {
               Padding(
                 padding: EdgeInsets.only(left: SizeConfig.widthMultiplier * 14),
                 child: Slider(
-                  value: 0.56,
+                  value: _value,
                   max: 3.02,
-                  onChanged: (double value) {},
+                  onChanged: (double value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
                 ),
               )
             ],
