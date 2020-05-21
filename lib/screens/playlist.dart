@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttermusic/screens/player.dart';
+import 'package:fluttermusic/transition/slideTop.dart';
 import 'package:fluttermusic/utils/colors.dart';
 import 'package:fluttermusic/utils/config.dart';
+import 'package:fluttermusic/utils/helper.dart';
 
 class PlaylistXD extends StatefulWidget {
   @override
@@ -10,8 +13,6 @@ class PlaylistXD extends StatefulWidget {
 }
 
 class _PlaylistXDState extends State<PlaylistXD> {
-  int selected = 3;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,35 +73,38 @@ class _PlaylistXDState extends State<PlaylistXD> {
               height: SizeConfig.heightMultiplier * 76,
               child: ListView.builder(
                   physics: BouncingScrollPhysics(),
-                  itemCount: 8,
+                  itemCount: musicList.length,
                   itemBuilder: (context, index) {
-                    return index == selected
+                    return index == selectedMusic
                         ? Padding(
-                          padding: EdgeInsets.symmetric(vertical: SizeConfig.heightMultiplier),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.centerLeft,end: Alignment.center,
-                                colors: [textLight.withOpacity(0.1),backgroundColor]
-                              )
-                            ),
-                            padding: EdgeInsets.only(top: SizeConfig.heightMultiplier * 3),
-                            child: Column(
+                            padding: EdgeInsets.symmetric(
+                                vertical: SizeConfig.heightMultiplier),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.center,
+                                      colors: [
+                                    textLight.withOpacity(0.1),
+                                    backgroundColor
+                                  ])),
+                              padding: EdgeInsets.only(
+                                  top: SizeConfig.heightMultiplier * 3),
+                              child: Column(
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.only(
                                         left: SizeConfig.widthMultiplier * 14,
                                         right: SizeConfig.widthMultiplier * 8,
-                                    bottom: SizeConfig.heightMultiplier),
+                                        bottom: SizeConfig.heightMultiplier),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         SizedBox(
-                                          width: SizeConfig.widthMultiplier * 38,
+                                          width:
+                                              SizeConfig.widthMultiplier * 60,
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
                                             children: <Widget>[
                                               Container(
                                                 decoration: BoxDecoration(
@@ -109,9 +113,19 @@ class _PlaylistXDState extends State<PlaylistXD> {
                                                         width: 0.8),
                                                     shape: BoxShape.circle),
                                                 padding: EdgeInsets.all(
-                                                    SizeConfig.heightMultiplier),
-                                                child: Icon(Icons.pause,size: SizeConfig.heightMultiplier * 2.2,),
+                                                    SizeConfig
+                                                        .heightMultiplier),
+                                                child: Icon(
+                                                  Icons.pause,
+                                                  size: SizeConfig
+                                                          .heightMultiplier *
+                                                      2.2,
+                                                ),
                                               ),
+                                              SizedBox(
+                                                  width: SizeConfig
+                                                          .widthMultiplier *
+                                                      8),
                                               Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -119,21 +133,25 @@ class _PlaylistXDState extends State<PlaylistXD> {
                                                     MainAxisAlignment.center,
                                                 children: <Widget>[
                                                   Text(
-                                                    'OSCAR H.',
+                                                    musicList[index].artistName,
                                                     style: TextStyle(
                                                         fontFamily: 'Poppins',
                                                         color: textDark,
+                                                        fontSize: SizeConfig
+                                                                .textMultiplier *
+                                                            1.5,
                                                         letterSpacing: 0.2,
                                                         wordSpacing: 2),
                                                   ),
                                                   Text(
-                                                    'The Dawn',
+                                                    musicList[index].songName,
                                                     style: TextStyle(
                                                         fontFamily: 'Poppins',
                                                         fontSize: SizeConfig
                                                                 .textMultiplier *
                                                             2.2,
-                                                        fontWeight: FontWeight.w500,
+                                                        fontWeight:
+                                                            FontWeight.w500,
                                                         letterSpacing: 0.2,
                                                         wordSpacing: 1),
                                                   )
@@ -143,7 +161,7 @@ class _PlaylistXDState extends State<PlaylistXD> {
                                           ),
                                         ),
                                         Text(
-                                          '3:02',
+                                          musicList[index].maxTime,
                                           style: TextStyle(
                                               fontFamily: 'Poppins',
                                               color: textDark,
@@ -164,71 +182,87 @@ class _PlaylistXDState extends State<PlaylistXD> {
                                   )
                                 ],
                               ),
-                          ),
-                        )
+                            ),
+                          )
                         : Padding(
                             padding: EdgeInsets.only(
                                 left: SizeConfig.widthMultiplier * 14,
                                 right: SizeConfig.widthMultiplier * 8,
                                 bottom: SizeConfig.heightMultiplier * 3,
-                            top: SizeConfig.heightMultiplier * 3),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: SizeConfig.widthMultiplier * 38,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: textLight, width: 0.8),
-                                            shape: BoxShape.circle),
-                                        padding: EdgeInsets.all(
-                                            SizeConfig.heightMultiplier),
-                                        child: Icon(Icons.play_arrow,size: SizeConfig.heightMultiplier * 2.2,),
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text(
-                                            'OSCAR H.',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                color: textDark,
-                                                letterSpacing: 0.2,
-                                                wordSpacing: 2),
+                                top: SizeConfig.heightMultiplier * 3),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedMusic = index;
+                                });
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: SizeConfig.widthMultiplier * 60,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: textLight, width: 0.8),
+                                              shape: BoxShape.circle),
+                                          padding: EdgeInsets.all(
+                                              SizeConfig.heightMultiplier),
+                                          child: Icon(
+                                            Icons.play_arrow,
+                                            size: SizeConfig.heightMultiplier *
+                                                2.2,
                                           ),
-                                          Text(
-                                            'The Dawn',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                fontSize:
-                                                    SizeConfig.textMultiplier *
-                                                        2.2,
-                                                fontWeight: FontWeight.w500,
-                                                letterSpacing: 0.2,
-                                                wordSpacing: 1),
-                                          )
-                                        ],
-                                      )
-                                    ],
+                                        ),
+                                        SizedBox(
+                                            width:
+                                                SizeConfig.widthMultiplier * 8),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text(
+                                              musicList[index].artistName,
+                                              style: TextStyle(
+                                                  fontFamily: 'Poppins',
+                                                  color: textDark,
+                                                  fontSize: SizeConfig
+                                                          .textMultiplier *
+                                                      1.4,
+                                                  letterSpacing: 0.2,
+                                                  wordSpacing: 2),
+                                            ),
+                                            Text(
+                                              musicList[index].songName,
+                                              style: TextStyle(
+                                                  fontFamily: 'Poppins',
+                                                  fontSize: SizeConfig
+                                                          .textMultiplier *
+                                                      2,
+                                                  fontWeight: FontWeight.w500,
+                                                  letterSpacing: 0.2,
+                                                  wordSpacing: 1),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '3:02',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: textDark,
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 0.2),
-                                ),
-                              ],
+                                  Text(
+                                    musicList[index].maxTime,
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color: textDark,
+                                        fontWeight: FontWeight.w500,
+                                        letterSpacing: 0.2),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                   }),
@@ -236,72 +270,79 @@ class _PlaylistXDState extends State<PlaylistXD> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        height: SizeConfig.heightMultiplier * 11,
-        color: Colors.blue,
-        child: Padding(
-          padding: EdgeInsets.only(
-              left: SizeConfig.widthMultiplier * 14,
-              right: SizeConfig.widthMultiplier * 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              SizedBox(
-                width: SizeConfig.widthMultiplier * 34,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: textLight, width: 0.6),
-                            shape: BoxShape.circle),
-                        padding: EdgeInsets.all(SizeConfig.heightMultiplier),
-                        child: Icon(
-                          Icons.pause,
-                          color: backgroundColor,
-                          size: SizeConfig.heightMultiplier * 2.2,
-                        )),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'OSCAR H.',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: backgroundColor,
-                              fontSize: SizeConfig.textMultiplier * 1.4,
-                              letterSpacing: 0.2,
-                              wordSpacing: 2),
-                        ),
-                        Text(
-                          'The Dawn',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: backgroundColor,
-                              fontSize: SizeConfig.textMultiplier * 2,
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 0.2,
-                              wordSpacing: 1),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: textLight.withOpacity(0.4), width: 0.6),
-                    shape: BoxShape.circle,
+      bottomNavigationBar: GestureDetector(
+        onTap: () {
+          Navigator.push(context, SlideTopRoute(page: PlayerXD()));
+        },
+        child: Container(
+          height: SizeConfig.heightMultiplier * 11,
+          color: Colors.blue,
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: SizeConfig.widthMultiplier * 14,
+                right: SizeConfig.widthMultiplier * 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SizedBox(
+                  width: SizeConfig.widthMultiplier * 60,
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: textLight, width: 0.6),
+                              shape: BoxShape.circle),
+                          padding: EdgeInsets.all(SizeConfig.heightMultiplier),
+                          child: Icon(
+                            Icons.pause,
+                            color: backgroundColor,
+                            size: SizeConfig.heightMultiplier * 2.2,
+                          )),
+                      SizedBox(
+                        width: SizeConfig.widthMultiplier * 6,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            musicList[selectedMusic].artistName,
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                color: backgroundColor,
+                                fontSize: SizeConfig.textMultiplier * 1.4,
+                                letterSpacing: 0.2,
+                                wordSpacing: 2),
+                          ),
+                          Text(
+                            musicList[selectedMusic].songName,
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                color: backgroundColor,
+                                fontSize: SizeConfig.textMultiplier * 2,
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 0.2,
+                                wordSpacing: 1),
+                          )
+                        ],
+                      ),
+                    ],
                   ),
-                  padding: EdgeInsets.all(3),
-                  child: Icon(
-                    Icons.keyboard_arrow_up,
-                    size: SizeConfig.heightMultiplier * 2,
-                    color: backgroundColor,
-                  ))
-            ],
+                ),
+                Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: textLight.withOpacity(0.4), width: 0.6),
+                      shape: BoxShape.circle,
+                    ),
+                    padding: EdgeInsets.all(3),
+                    child: Icon(
+                      Icons.keyboard_arrow_up,
+                      size: SizeConfig.heightMultiplier * 2,
+                      color: backgroundColor,
+                    ))
+              ],
+            ),
           ),
         ),
       ),

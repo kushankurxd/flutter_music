@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttermusic/utils/colors.dart';
 import 'package:fluttermusic/utils/config.dart';
+import 'package:fluttermusic/utils/helper.dart';
 import 'package:fluttermusic/widgets/twoDots.dart';
 
 class PlayerXD extends StatefulWidget {
@@ -44,7 +45,7 @@ class _PlayerXDState extends State<PlayerXD> {
                                     bottomRight: Radius.circular(
                                         SizeConfig.heightMultiplier * 19)),
                                 child: Image.asset(
-                                  'img/troyeSivan.jpg',
+                                  musicList[selectedMusic].image,
                                   fit: BoxFit.cover,
                                 )),
                           ),
@@ -138,17 +139,22 @@ class _PlayerXDState extends State<PlayerXD> {
                             ),
                           ],
                         ),
-                        Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: textLight, width: 0.6),
-                              shape: BoxShape.circle,
-                            ),
-                            padding: EdgeInsets.all(3),
-                            child: Icon(
-                              Icons.keyboard_arrow_down,
-                              size: SizeConfig.heightMultiplier * 2,
-                              color: textDark,
-                            ))
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: textLight, width: 0.6),
+                                shape: BoxShape.circle,
+                              ),
+                              padding: EdgeInsets.all(3),
+                              child: Icon(
+                                Icons.keyboard_arrow_down,
+                                size: SizeConfig.heightMultiplier * 2,
+                                color: textDark,
+                              )),
+                        )
                       ],
                     ),
 
@@ -183,7 +189,7 @@ class _PlayerXDState extends State<PlayerXD> {
                     ),
                     //Artist and music name
                     Text(
-                      'Oscar Hayes',
+                      musicList[selectedMusic].artistName,
                       style: TextStyle(
                           fontFamily: 'Poppins',
                           color: textDark,
@@ -196,7 +202,7 @@ class _PlayerXDState extends State<PlayerXD> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'The Dawn',
+                          musicList[selectedMusic].songName,
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               fontSize: SizeConfig.textMultiplier * 3.4,
@@ -229,7 +235,7 @@ class _PlayerXDState extends State<PlayerXD> {
                                 letterSpacing: 0.2),
                           ),
                           Text(
-                            '3:02',
+                            musicList[selectedMusic].maxTime,
                             style: TextStyle(
                                 fontFamily: 'Poppins',
                                 color: textDark,
