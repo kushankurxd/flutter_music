@@ -16,6 +16,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
+            sliderTheme: SliderThemeData(
+              thumbShape: RoundSliderThumbShape(enabledThumbRadius: SizeConfig.widthMultiplier * 1.6)
+            ),
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
