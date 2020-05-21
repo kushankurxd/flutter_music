@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttermusic/screens/player.dart';
+import 'package:fluttermusic/screens/playlist.dart';
 import 'package:fluttermusic/utils/config.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: PlayerXD(),
+          home: PlaylistXD(),
         );
       });
     });
