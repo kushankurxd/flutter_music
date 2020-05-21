@@ -1,6 +1,12 @@
-# fluttermusic
+# Flutter Next-Gen Music Player UI/UX 
 
-A new Flutter application.
+A new Flutter application that shows the concept of next gen music player ui/ux design.
+
+#### Screenshots
+![Screenshot_20200522-001000](https://user-images.githubusercontent.com/37204706/82594054-216ce700-9bc1-11ea-9fe1-906c11c6767a.jpg)
+![Screenshot_20200522-001016](https://user-images.githubusercontent.com/37204706/82594060-229e1400-9bc1-11ea-94d5-1103122410fb.jpg)
+![Screenshot_20200522-001028](https://user-images.githubusercontent.com/37204706/82594063-2336aa80-9bc1-11ea-91b7-c71f9c9b7bf7.jpg)
+
 
 ## Getting Started
 
